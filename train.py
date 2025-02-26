@@ -31,9 +31,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 handler = logging.StreamHandler()
-handler.setFormatter(
-    logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-)
+handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
 logger.addHandler(handler)
 
 ########################
@@ -140,7 +138,7 @@ def get_checkpoint(training_args: GRPOConfig):
     return last_checkpoint
 
 
-def grpo_function(
+def main(
     model_args: ModelConfig, script_args: ScriptArguments, training_args: GRPOConfig
 ):
     #########################
@@ -153,11 +151,7 @@ def grpo_function(
     # Load tokenizer
     ################
     tokenizer = AutoTokenizer.from_pretrained(
-        (
-            script_args.tokenizer_name_or_path
-            if script_args.tokenizer_name_or_path
-            else model_args.model_name_or_path
-        ),
+        script_args.tokenizer_name_or_path if script_args.tokenizer_name_or_path else model_args.model_name_or_path,
         revision=model_args.model_revision,
         trust_remote_code=model_args.trust_remote_code,
     )
@@ -224,9 +218,7 @@ def grpo_function(
         logger.info(f"Checkpoint detected, resuming training at {last_checkpoint}.")
 
     # Train the model
-    logger.info(
-        f'*** Starting training {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} for {training_args.num_train_epochs} epochs***'
-    )
+    logger.info(f'*** Starting training {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} for {training_args.num_train_epochs} epochs***')
     train_result = trainer.train(resume_from_checkpoint=last_checkpoint)
     # Log and save metrics
     metrics = train_result.metrics
@@ -261,13 +253,9 @@ def grpo_function(
     logger.info("*** Training complete! ***")
 
 
-def main():
+if __name__ == "__main__":
     parser = TrlParser((ModelConfig, ScriptArguments, GRPOConfig))
     model_args, script_args, training_args = parser.parse_args_and_config()
 
     # Run the main training loop
-    grpo_function(model_args, script_args, training_args)
-
-
-if __name__ == "__main__":
-    main()
+    main(model_args, script_args, training_args)
