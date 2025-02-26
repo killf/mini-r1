@@ -28,8 +28,8 @@ beta: 0.001 # 0.04 as in the deepseek math paper 0.001 from https://hijkzzz.noti
 max_prompt_length: 256
 max_completion_length: 1024
 num_generations: 8
-use_vllm: true
-# vllm_device: "cuda:3"
+use_vllm: false
+# vllm_device: "cuda:4"
 vllm_gpu_memory_utilization: 0.5
 
 # Logging arguments
@@ -43,5 +43,5 @@ seed: 42
 
 # Hugging Face Hub 
 push_to_hub: false 
-  # hub_model_id: llama-3-1-8b-math-orca-qlora-10k-ep1 # if not defined same as output_dir
+# hub_model_id: llama-3-1-8b-math-orca-qlora-10k-ep1 # if not defined same as output_dir
 hub_strategy: every_save
