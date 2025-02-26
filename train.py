@@ -61,7 +61,7 @@ def format_reward_func(completions, target, **kwargs):
           os.makedirs("completion_samples", exist_ok=True)
           log_file = os.path.join("completion_samples", "completion_samples.txt")
           with open(log_file, "a") as f:
-            f.write(f"\n\n==============\n")
+            f.write(f"\n\n====================================================================================\n")
             f.write(completion)
         
         # Check if the format is correct
@@ -124,7 +124,7 @@ def equation_reward_func(completions, target, nums, **kwargs):
                 os.makedirs("completion_samples", exist_ok=True)
                 log_file = os.path.join("completion_samples", "success_completion_samples.txt")
                 with open(log_file, "a") as f:
-                    f.write(f"\n\n==============\n")
+                    f.write(f"\n\n====================================================================================\n")
                     f.write(completion)
         else:
             rewards.append(0.0)
