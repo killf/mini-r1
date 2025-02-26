@@ -34,7 +34,7 @@ vllm_gpu_memory_utilization: 0.5
 
 # Logging arguments
 logging_strategy: steps
-logging_steps: 2
+logging_steps: 1
 report_to:
 - tensorboard
 save_strategy: "steps"
@@ -45,4 +45,3 @@ seed: 42
 push_to_hub: false 
   # hub_model_id: llama-3-1-8b-math-orca-qlora-10k-ep1 # if not defined same as output_dir
 hub_strategy: every_save
-
