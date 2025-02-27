@@ -1,20 +1,20 @@
 # Model arguments
-model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+model_name_or_path: Qwen/Qwen2.5-VL-3B-Instruct
 model_revision: main
 torch_dtype: bfloat16
 attn_implementation: flash_attention_2
 bf16: true
 tf32: true
-output_dir: runs/qwen-2.5-3b-countdown
+output_dir: runs/qwen-2.5-vl-3b
 
 # Dataset arguments
-dataset_id_or_path: Jiayi-Pan/Countdown-Tasks-3to4
+dataset_id_or_path: ./data/sample
 
 # Lora Arguments
 # No LoRA is used here
 
 # Training arguments
-max_steps: 450
+max_steps: 200
 per_device_train_batch_size: 1
 gradient_accumulation_steps: 8
 gradient_checkpointing: true
@@ -25,10 +25,10 @@ lr_scheduler_type: cosine
 warmup_ratio: 0.03
 # GRPO specific parameters
 beta: 0.001 # 0.04 as in the deepseek math paper 0.001 from https://hijkzzz.notion.site/unraveling-rlhf-and-its-variants-engineering-insights#147d9a33ecc9806090f3d5c749d31f05
-max_prompt_length: 256
+max_prompt_length: null
 max_completion_length: 1024
-num_generations: 8
-use_vllm: true
+num_generations: 4
+use_vllm: false
 # vllm_device: "cuda:0"
 vllm_gpu_memory_utilization: 0.5
 
